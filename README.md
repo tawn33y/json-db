@@ -32,24 +32,24 @@ index.js
   // 2. read all
   const value = store.get('*'); // => { "users": [{ "id": 1, "name": "John Doe" }], "notes": [] }
   
-  // 2. write
+  // 3. write
   const newUser = { id: 2, name: "Jane Doe" };
   store.set('users', [...users, newUser]);
   // store.get('users') => [{ "id": 1, "name": "John Doe" }, { "id": 2, "name": "Jane Doe" }]
 
-  // 3. delete one
+  // 4. delete one
   store.del('users'); 
   // store.get('users') => undefined
   // store.get('*') => { "notes": [] }
 
-  // 4. delete all
+  // 5. delete all
   store.del('*');
   // store.get('*') => {}
 })();
 
 ```
 
-## 2. Example usage with express
+## 3. Example usage with express
 ```ts
 import * as express from 'express';
 import { createStore } from 'simple-jstore';
@@ -73,12 +73,12 @@ createStore('./store.json')
   });
 ```
 
-## 3. Method Syntax
+## 4. Method Syntax
 ```ts
 createStore(filePath: string, [persistInterval: number]): Promise<Store>
 ```
 
-## 4. Arguments
+## 5. Arguments
 - **filePath**: The path where your JSON file will be saved.
   <br />****NOTE****: Your JSON file should contain valid JSON. If you do not have any data, create a new file with {} as the only content,
   <br />e.g.
@@ -94,7 +94,7 @@ createStore(filePath: string, [persistInterval: number]): Promise<Store>
   ```
 - **persistInterval**: *optional*, time in milliseconds after which changes to the store will be persisted
 
-## 5. Return value
+## 6. Return value
 Calling the method returns a Promise which resolves to an object with the following methods:
 - get
   ```ts
