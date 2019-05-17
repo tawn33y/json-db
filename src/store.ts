@@ -1,7 +1,8 @@
 import { readJsonFile, writeJsonFile } from './files';
+import { Store } from './interface';
 
-export const createStore = (filePath: string, persistInterval = 2000) => new Promise((resolve, reject) =>
-  readJsonFile(filePath).then((data) => {
+export const createStore = (filePath: string, persistInterval: number = 2000): Promise<Store> => 
+  new Promise((resolve, reject) => readJsonFile(filePath).then((data) => {
     let state = { ...data };
     let valueHasChanged = false;
 
