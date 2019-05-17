@@ -1,0 +1,15 @@
+{
+  "name": "json-db",
+  "version": "0.1.0",
+  "description": "",
+  "author": "K Tony",
+  "license": "GPL-3.0",
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.2",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5"
+  }
+}
