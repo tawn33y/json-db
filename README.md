@@ -4,10 +4,49 @@ simple-jstore is an in-memory database with automatic persistence to a JSON file
 
 Inspired by redis/redux, simple-jstore stores your app's data in an in-memory store, and persists changes automatically to a JSON file only after a specified time interval (instead of on every store change)
 
+**NOTES**:
+1) All the data is stored in-memory. Thus each read/write operation happens really fast, contrary to parsing the data from the JSON file for every read/write request.
+2) Data is persisted to the JSON file only after a specified time interval to avoid multiple simultaneous writes, e.g. imagine 3000 requests all writing to the JSON file at once
+3) Use this package for cases where you want to build a mock server very fast, which has data management capabilities but you do not want to use too much time focusing on the db (mysql, mongo, etc) e.g. when working on frontend (angular, react, etc).
+
 ## 1. Install
 
 ```bash
 npm i simple-jstore
+```
+
+## 2. Example usage
+store.json
+```json
+{ "users": [{ "id": 1, "name": "John Doe" }], "notes": [] }
+```
+
+index.js
+```ts
+(async () => {
+  const store = await createStore('./store.json');
+
+  // 1. read one
+  const users = store.get('users'); // => [{ "id": 1, "name": "John Doe" }]
+
+  // 2. read all
+  const value = store.get('*'); // => { "users": [{ "id": 1, "name": "John Doe" }], "notes": [] }
+  
+  // 2. write
+  const newUser = { id: 2, name: "Jane Doe" };
+  store.set('users', [...users, newUser]);
+  // store.get('users') => [{ "id": 1, "name": "John Doe" }, { "id": 2, "name": "Jane Doe" }]
+
+  // 3. delete one
+  store.del('users'); 
+  // store.get('users') => undefined
+  // store.get('*') => { "notes": [] }
+
+  // 4. delete all
+  store.del('*');
+  // store.get('*') => {}
+})();
+
 ```
 
 ## 2. Example usage with express

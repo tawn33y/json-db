@@ -1,6 +1,6 @@
 {
   "name": "simple-jstore",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "simple-jstore is an in-memory database with automatic persistence to a JSON file",
   "keywords": [
     "json",
