@@ -1,6 +1,6 @@
 {
   "name": "simple-jstore",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "simple-jstore is an in-memory database with automatic persistence to a JSON file",
   "keywords": [
     "json",
@@ -10,7 +10,7 @@
     "redis",
     "redux"
   ],
-  "homepage": "https://github.com/tawn33y/simple-jstore#readme",
+  "homepage": "https://github.com/tawn33y/simple-jstore",
   "bugs": {
     "url": "https://github.com/tawn33y/simple-jstore/issues",
     "email": "tawn33y@gmail.com"
