@@ -1,9 +1,27 @@
 {
   "name": "simple-jstore",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "simple-jstore is an in-memory database with automatic persistence to a JSON file",
-  "author": "K Tony",
+  "keywords": [
+    "json",
+    "database",
+    "in-memory",
+    "store",
+    "redis",
+    "redux"
+  ],
+  "homepage": "https://github.com/tawn33y/simple-jstore#readme",
+  "bugs": {
+    "url": "https://github.com/tawn33y/simple-jstore/issues",
+    "email": "tawn33y@gmail.com"
+  },
   "license": "GPL-3.0",
+  "author": "K Tony <tawn33y@gmail.com> (https://t.me/tawn33y)",
+  "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tawn33y/simple-jstore.git"
+  },
   "scripts": {
     "start": "ts-node src/index.ts"
   },

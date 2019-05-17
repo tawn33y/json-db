@@ -10,7 +10,7 @@ Inspired by redis/redux, simple-jstore stores your app's data in an in-memory st
 npm i simple-jstore
 ```
 
-## 2. Example Usage with Express
+## 2. Example usage with express
 ```ts
 import * as express from 'express';
 import { createStore } from 'simple-jstore';
@@ -18,17 +18,20 @@ import { createStore } from 'simple-jstore';
 const app = express();
 const port = 3000;
 
-createStore('./store.json').then(store => {
+createStore('./store.json')
+  .then(store => {
 
-  app.get('/users', (req, res) => {
-    const users = store.get('users');
-    res.json(users);
+    app.get('/users', (req, res) => {
+      const users = store.get('users');
+      res.json(users);
+    });
+
+    app.listen(3000, () => console.log(`Server running on port ${port}`));
+
+  })
+  .catch(err => {
+    console.log(err);
   });
-
-  app.listen(3000, () => console.log(`Server running on port ${port}`));
-
-})
-.catch(err => console.log(err));
 ```
 
 ## 3. Method Syntax
