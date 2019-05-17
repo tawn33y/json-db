@@ -1,13 +1,13 @@
 # simple-jstore
 
-simple-jstore is an in-memory database with automatic persistence to a JSON file. It is the fastest way to create a database for your application, especially if you do not have time to create a database using mysql, mongo, etc.
+*simple-jstore* is an in-memory database with automatic persistence to a JSON file.
 
-Inspired by redis/redux, simple-jstore stores your app's data in an in-memory store, and persists changes automatically to a JSON file only after a specified time interval (instead of on every store change)
+Inspired by redis/redux, *simple-jstore* is the fastest way to create a server database for your application. It stores your app's data in an in-memory key-value store, and persists changes automatically to a JSON file.
 
-**NOTES**:
+**FEATURES**:
 1) All the data is stored in-memory. Thus each read/write operation happens really fast, contrary to parsing the data from the JSON file for every read/write request.
 2) Data is persisted to the JSON file only after a specified time interval to avoid multiple simultaneous writes, e.g. imagine 3000 requests all writing to the JSON file at once
-3) Use this package for cases where you want to build a mock server very fast, which has data management capabilities but you do not want to use too much time focusing on the db (mysql, mongo, etc) e.g. when working on frontend (angular, react, etc).
+3) One typical usecase for this package is in fast server deployments with minimal focus on the database, e.g. when building a data server for a frontend SPA (angular, react, vue, etc) with the objective of not using too much time building the db (mysql, mongo, etc)
 
 ## 1. Install
 
@@ -16,6 +16,12 @@ npm i simple-jstore
 ```
 
 ## 2. Example usage
+```
+├── src
+|   ├── store.json
+|   └── index.js
+```
+
 store.json
 ```json
 { "users": [{ "id": 1, "name": "John Doe" }], "notes": [] }
@@ -50,7 +56,19 @@ index.js
 ```
 
 ## 3. Example usage with express
-```ts
+```
+├── src
+|   ├── store.json
+|   └── index.js
+```
+
+store.json
+```json
+{ "users": [{ "id": 1, "name": "John Doe" }] }
+```
+
+index.js
+```js
 import * as express from 'express';
 import { createStore } from 'simple-jstore';
 
@@ -63,6 +81,12 @@ createStore('./store.json')
     app.get('/users', (req, res) => {
       const users = store.get('users');
       res.json(users);
+    });
+
+    app.get('/users/:userId', (req, res) => {
+      const users = store.get('users');
+      const user = users.find(id => id === userId);
+      res.json(user);
     });
 
     app.listen(3000, () => console.log(`Server running on port ${port}`));
