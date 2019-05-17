@@ -1,7 +1,7 @@
 {
   "name": "simple-jstore",
-  "version": "0.2.0",
-  "description": "",
+  "version": "0.2.1",
+  "description": "simple-jstore is an in-memory database with automatic persistence to a JSON file",
   "author": "K Tony",
   "license": "GPL-3.0",
   "scripts": {
