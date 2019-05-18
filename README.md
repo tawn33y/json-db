@@ -95,7 +95,7 @@ createStore('./store.json')
 ```
 
 ## 4. API
-### **```createStore(filePath: string, [persistInterval: number]): Promise<Store>```**
+### **```createStore(filePath: string, [persistInterval: number]) => Promise<Store>```**
 #### Arguments
 - ```filePath``` (string, required)
   <br />The path where your JSON file will be saved.
