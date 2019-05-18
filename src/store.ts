@@ -6,7 +6,7 @@ export const createStore = (filePath: string, persistInterval: number = 2000): P
     let state = { ...data };
     let valueHasChanged = false;
 
-    setTimeout(() => {
+    setInterval(() => {
       if (!valueHasChanged) { return; }
 
       writeJsonFile(filePath, state)

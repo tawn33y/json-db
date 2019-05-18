@@ -17,7 +17,7 @@ exports.createStore = function (filePath, persistInterval) {
     return new Promise(function (resolve, reject) { return files_1.readJsonFile(filePath).then(function (data) {
         var state = __assign({}, data);
         var valueHasChanged = false;
-        setTimeout(function () {
+        setInterval(function () {
             if (!valueHasChanged) {
                 return;
             }

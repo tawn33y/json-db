@@ -82,7 +82,7 @@ createStore('./store.json')
 
     app.get('/users/:userId', (req, res) => {
       const users = store.get('users');
-      const user = users.find(id => id === userId);
+      const user = users.find(u => u.id === userId);
       res.json(user);
     });
 
