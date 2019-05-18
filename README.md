@@ -30,6 +30,8 @@ store.json
 
 index.js
 ```ts
+import { createStore } from 'simple-jstore';
+
 (async () => {
   const store = await createStore('./store.json');
 
