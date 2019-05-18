@@ -1,12 +1,13 @@
 {
   "name": "simple-jstore",
-  "version": "0.2.11",
-  "description": "simple-jstore is an in-memory database with automatic persistence to a JSON file",
+  "version": "0.2.12",
+  "description": "simple-jstore is an in-memory key-value store with automatic persistence to a JSON file",
   "keywords": [
     "json",
     "database",
     "in-memory",
-    "store",
+    "store",,
+    "key-value"
     "redis",
     "redux"
   ],

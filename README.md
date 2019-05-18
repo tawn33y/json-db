@@ -1,6 +1,6 @@
 # simple-jstore
 
-*simple-jstore* is an in-memory database with automatic persistence to a JSON file.
+*simple-jstore* is an in-memory key-value store with automatic persistence to a JSON file.
 
 Inspired by redis/redux, *simple-jstore* is the fastest way to create a server database for your application. It stores your app's data in an in-memory key-value store, and persists changes automatically to a JSON file.
 
