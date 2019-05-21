@@ -84,6 +84,8 @@ createStore('./store.json')
 
     app.get('/users/:userId', (req, res) => {
       const users = store.get('users');
+      const userId = parseInt(req.params.userId, 10);
+
       const user = users.find(u => u.id === userId);
       res.json(user);
     });
