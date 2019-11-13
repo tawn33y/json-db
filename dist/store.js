@@ -42,7 +42,7 @@ exports.createStore = function (filePath, persistInterval) {
 var readFromStore = function (state, key) { return key === '*' ? state : state[key] || undefined; };
 var updateStore = function (state, key, data) {
     var _a;
-    return __assign({}, state, (_a = {}, _a[key] = data, _a));
+    return __assign(__assign({}, state), (_a = {}, _a[key] = data, _a));
 };
 var deleteFromStore = function (state, key) {
     if (key === '*') {
