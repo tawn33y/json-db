@@ -23,6 +23,9 @@
     "type": "git",
     "url": "https://github.com/tawn33y/simple-jstore.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build": "tsc",
