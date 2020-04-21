@@ -3,3 +3,6 @@ export interface Store {
     set: (key: string, data: any) => void;
     del: (key: string) => void;
 }
+export interface FreeFormObject {
+    [key: string]: any;
+}

@@ -1,52 +1,49 @@
 import { readJsonFile, writeJsonFile } from './files';
-import { Store } from './interface';
+import { Store, FreeFormObject } from './store.types';
 
-export const createStore = (filePath: string, persistInterval: number = 2000): Promise<Store> => 
-  new Promise((resolve, reject) => readJsonFile(filePath).then((data) => {
-    let state = { ...data };
-    let valueHasChanged = false;
+const readFromStore = (
+  state: FreeFormObject, key: string,
+): any => (key === '*' ? state : state[key] || undefined);
 
-    setInterval(() => {
-      if (!valueHasChanged) { return; }
+const updateStore = (state: FreeFormObject, key: string, data: any): FreeFormObject => ({
+  ...state,
+  [key]: data,
+});
 
-      writeJsonFile(filePath, state)
-        .then(() => console.log('@@ store updated'))
-        .catch((err) => console.log('!! store failed to updated', err))
-        .finally(() => valueHasChanged = false);
-    }, persistInterval);
+const deleteFromStore = (state: FreeFormObject, key: string): FreeFormObject => {
+  if (key === '*') return {};
 
-    resolve({
-      get: (key: string): any => readFromStore(state, key),
-      set: (key: string, data: any): void => {
-        state = updateStore(state, key, data);
-        valueHasChanged = true;
-      },
-      del: (key: string): void => {
-        state = deleteFromStore(state, key);
-        valueHasChanged = true;
-      },
-    });
-  }).catch((err) => reject(err))
-);
+  const { [key]: deletedKey, ...rest } = state;
 
-const readFromStore = (state: object, key: string): any => key === '*' ? state : state[key] || undefined;
-
-const updateStore = (state: object, key: string, data: any): object => {
-  return {
-    ...state,
-    [key]: data,
-  };
+  return rest;
 };
 
-const deleteFromStore = (state: object, key: string): object => {
-  if (key === '*') {
-    return {};
-  } else {
-    return Object.keys(state)
-            .filter(k => k !== key)
-            .reduce((acc, k) => {
-              acc[k] = state[k];
-              return acc;
-            }, {});
-  };
-};
+export const createStore = (
+  filePath: string, persistInterval: number = 2000,
+): Promise<Store> => new Promise((resolve, reject) => readJsonFile(filePath).then((data) => {
+  let state = { ...data };
+  let valueHasChanged = false;
+
+  setInterval(() => {
+    if (!valueHasChanged) return;
+
+    writeJsonFile(filePath, state)
+      .then(() => console.log('[✔️] store updated'))
+      .catch((err) => console.log('[ERR] store failed to updated', err))
+      .finally(() => {
+        valueHasChanged = false;
+      });
+  }, persistInterval);
+
+  resolve({
+    get: (key) => readFromStore(state, key),
+    set: (key, newData) => {
+      state = updateStore(state, key, newData);
+      valueHasChanged = true;
+    },
+    del: (key) => {
+      state = deleteFromStore(state, key);
+      valueHasChanged = true;
+    },
+  });
+}).catch((err) => reject(err)));
