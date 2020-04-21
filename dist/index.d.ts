@@ -1,2 +1,2 @@
-export * from './interface';
+export * from './store.types';
 export * from './store';
